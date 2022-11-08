@@ -1,6 +1,7 @@
 using CodeLouisvilleUnitTestProject;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using System;
 using Xunit.Abstractions;
 
 namespace CodeLouisvilleUnitTestProjectTests
@@ -72,11 +73,11 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void AddingTooMuchGasThrowsGasOverflowException()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle(4, 10, "Toyota", "Corolla", 30);
             //act
-
+            Action act = () => vehicle.AddGas(40);
             //assert
-
+            act.Should().Throw<NotImplementedException>("Caution: Gas filled over capacity.");
         }
 
         //Using a Theory (or data-driven test), verify that the GasLevel

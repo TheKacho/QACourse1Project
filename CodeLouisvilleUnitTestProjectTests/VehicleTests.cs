@@ -15,10 +15,11 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void VehicleParameterlessConstructorTest()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle();
             //act
 
             //assert
+            vehicle.Should().NotBeNull();
 
         }
 
@@ -29,10 +30,12 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void VehicleConstructorTest()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle(4, 10, "Toyota", "Corolla", 30);
             //act
 
             //assert
+            Assert.True(true, "This car does not have a make.");
+            vehicle.Should().Be(vehicle);
 
         }
 
@@ -42,11 +45,11 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void AddGasParameterlessFillsGasToMax()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle();
             //act
-
+            vehicle.AddGas();
             //assert
-
+            vehicle.GasLevel.Should().Be("100%");
         }
 
         //Verify that the AddGas method with a parameter adds the

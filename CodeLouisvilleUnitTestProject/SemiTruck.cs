@@ -1,4 +1,8 @@
-﻿namespace CodeLouisvilleUnitTestProject
+﻿using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Linq;
+
+namespace CodeLouisvilleUnitTestProject
 {
     public class SemiTruck : Vehicle
     {
@@ -9,8 +13,8 @@
         /// </summary>
         public SemiTruck()
         {
-            //YOUR CODE HERE: 
-            throw new NotImplementedException();
+            NumberOfTires = 18;
+            Cargo = new List<CargoItem>();
         }
 
         /// <summary>
@@ -19,10 +23,9 @@
         /// <param name="item">The CargoItem to add</param>
         public void LoadCargo(CargoItem item)
         {
-            //YOUR CODE HERE
-            throw new NotImplementedException();
+            Cargo.Add(item);
         }
-            
+
         /// <summary>
         /// Attempts to remove the first item with the passed name from the Cargo and return it
         /// </summary>

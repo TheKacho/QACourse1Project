@@ -57,7 +57,7 @@
             double newTotal = _gasRemaining + amount;
             if (newTotal > GasTankCapacity)
                 throw new GasOverfillException(amount, GasTankCapacity);
-            else 
+            else
                 _gasRemaining = newTotal;
             return _gasRemaining;
         }
@@ -93,10 +93,10 @@
                 }
             }
 
-            if(ableToDrive)
+            if (ableToDrive)
             {
                 bool gotFlat = GotFlatTire(miles);
-                if(gotFlat)
+                if (gotFlat)
                 {
                     _hasFlatTire = true;
                     statusString += " Oh no! Got a flat tire!";

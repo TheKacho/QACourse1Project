@@ -63,7 +63,7 @@ namespace CodeLouisvilleUnitTestProjectTests
             double newTotal = sut._gasRemaining +sut.AddGas(5);
 
             //assert
-            sut.GasLevel.Should().Be(newTotal);
+            sut.GasLevel.Should().Be($"{newTotal}%");
         }
 
         //Verify that the AddGas method with a parameter will throw

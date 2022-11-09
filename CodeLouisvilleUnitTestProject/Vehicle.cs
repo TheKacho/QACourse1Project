@@ -12,16 +12,28 @@
         public double MilesRemaining => _gasRemaining * MilesPerGallon;
         public double Mileage => _mileage;
         #endregion
+        public string Make { get; }
+        public string Model { get; }
+        public double MilesPerGallon { get; set; }
+        public double GasTankCapacity { get; init; }
+        public int NumberOfTires { get; init; }
+        public string GasLevel => $"{_gasRemaining / GasTankCapacity * 100}%";
+        public double MilesRemaining => _gasRemaining * MilesPerGallon;
+        public double Mileage => _mileage;
 
         #region Private Fields
         public double _gasRemaining;
         public double _mileage;
         public bool _hasFlatTire;
         #endregion
+        private double _gasRemaining;
+        private double _mileage;
+        private bool _hasFlatTire;
 
         #region Private Properties
         private double _flatTireChance => 0.0001 * NumberOfTires;
         #endregion
+        private double _flatTireChance => 0.0001 * NumberOfTires;
 
         public Vehicle()
             : this(0, 0, "", "", 0)

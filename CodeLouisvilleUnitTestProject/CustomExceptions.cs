@@ -1,6 +1,6 @@
 ﻿namespace CodeLouisvilleUnitTestProject
 {
-    internal class GasOverfillException : Exception
+    public class GasOverfillException : Exception
     {
         public GasOverfillException(double amountAdded, double capacity)
             : base($"Unable to add {amountAdded} gallons to tank " +

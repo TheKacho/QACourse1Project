@@ -35,7 +35,16 @@ namespace CodeLouisvilleUnitTestProject
         public CargoItem UnloadCargo(string name)
         {
             //YOUR CODE HERE
-            throw new NotImplementedException();
+            if(name != null)
+            {
+                Cargo[0].Name = name;
+                Cargo.RemoveAt(0);
+                return Cargo[0];
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
 
         /// <summary>
@@ -46,7 +55,12 @@ namespace CodeLouisvilleUnitTestProject
         public List<CargoItem> GetCargoItemsByName(string name)
         {
             //YOUR CODE HERE
-            throw new NotImplementedException();
+            List<CargoItem> cargoItems = new List<CargoItem>();
+            foreach (CargoItem cargoItem in cargoItems)
+            {
+                cargoItem.Name = name;
+            }
+            return cargoItems;
         }
 
         /// <summary>

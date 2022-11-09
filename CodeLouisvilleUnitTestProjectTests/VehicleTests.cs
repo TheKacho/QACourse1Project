@@ -135,7 +135,7 @@ namespace CodeLouisvilleUnitTestProjectTests
             using (new AssertionScope())
             {
                 vehicle.Drive(0);
-                vehicle.MilesRemaining.Should().Be(0, because: "Gas tank is empty, cannot drive.")
+                vehicle.MilesRemaining.Should().Be(0, because: "Gas tank is empty, cannot drive.");
             }
             
         }

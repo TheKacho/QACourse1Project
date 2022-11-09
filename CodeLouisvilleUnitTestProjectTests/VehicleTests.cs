@@ -89,14 +89,14 @@ namespace CodeLouisvilleUnitTestProjectTests
         [InlineData("50%", 5)]
         [InlineData("75%", 7.5)]
         [InlineData("100%", 10)]
-        public void GasLevelPercentageIsCorrectForAmountOfGas(params object[] yourParamsHere)
+        public void GasLevelPercentageIsCorrectForAmountOfGas(string gasTankPercent, float gasToAdd)
         {
             //arrange
             Vehicle vehicle = new Vehicle(4, 10, "Subaru", "Outback", 30);
             //act
             vehicle.AddGas(gasToAdd);
             //assert
-            vehicle.GasLevel.Should().Be(percentGasInTank);
+            vehicle.GasLevel.Should().Be(gasTankPercent);
         }
 
         /*

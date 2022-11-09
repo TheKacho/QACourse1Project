@@ -31,11 +31,11 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void VehicleConstructorTest()
         {
             //arrange
-            Vehicle vehicle = new Vehicle(4, 10, "Toyota", "Corolla", 30);
+            Vehicle vehicle = new Vehicle(4, 10, "Toyota", "Yaris", 30);
             //act
 
             //assert
-            Assert.True(true, "This car does not have a make.");
+            Assert.True(true, "This car does have a maker.");
             vehicle.Should().Be(vehicle);
 
         }
@@ -46,7 +46,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void AddGasParameterlessFillsGasToMax()
         {
             //arrange
-            Vehicle vehicle = new Vehicle();
+            Vehicle vehicle = new Vehicle(4, 2, "Dodge", "Viper", 50);
             //act
             vehicle.AddGas();
             //assert
@@ -73,7 +73,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void AddingTooMuchGasThrowsGasOverflowException()
         {
             //arrange
-            Vehicle vehicle = new Vehicle(4, 10, "Toyota", "Corolla", 30);
+            Vehicle vehicle = new Vehicle(4, 10, "Toyota", "Tundra", 30);
             //act
             Action act = () => vehicle.AddGas(40);
             //assert
@@ -84,15 +84,19 @@ namespace CodeLouisvilleUnitTestProjectTests
         //property returns the correct percentage when the gas level is
         //at 0%, 25%, 50%, 75%, and 100%.
         [Theory]
-        [InlineData("MysteryParamValue")]
+        [InlineData("0%", 0)]
+        [InlineData("25%", 2.5)]
+        [InlineData("50%", 5)]
+        [InlineData("75%", 7.5)]
+        [InlineData("100%", 10)]
         public void GasLevelPercentageIsCorrectForAmountOfGas(params object[] yourParamsHere)
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle(4, 10, "Subaru", "Outback", 30);
             //act
-
+            vehicle.AddGas(gasToAdd);
             //assert
-
+            vehicle.GasLevel.Should().Be(percentGasInTank);
         }
 
         /*

@@ -71,7 +71,12 @@ namespace CodeLouisvilleUnitTestProject
         public List<CargoItem> GetCargoItemsByPartialDescription(string description)
         {
             //YOUR CODE HERE
-            throw new NotImplementedException();
+            List<CargoItem> cargoItems = new List<CargoItem>();
+            foreach(CargoItem cargoItem in cargoItems)
+            {
+                cargoItem.Description = description;
+            }
+            return cargoItems;
         }
 
         /// <summary>
@@ -81,7 +86,8 @@ namespace CodeLouisvilleUnitTestProject
         public int GetTotalNumberOfItems()
         {
             //YOUR CODE HERE
-            throw new NotImplementedException();
+            int cargoSum = Cargo.Count;
+            return cargoSum;
         }
     }
 }

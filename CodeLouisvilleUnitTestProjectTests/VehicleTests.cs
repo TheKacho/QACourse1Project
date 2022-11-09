@@ -77,7 +77,7 @@ namespace CodeLouisvilleUnitTestProjectTests
             //act
             Action act = () => vehicle.AddGas(40);
             //assert
-            act.Should().Throw<GasOverfillException>("Caution: Gas filled over capacity.");
+            act.Should().Throw<GasOverfillException>();
         }
 
         //Using a Theory (or data-driven test), verify that the GasLevel

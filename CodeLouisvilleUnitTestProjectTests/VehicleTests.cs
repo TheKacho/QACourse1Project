@@ -48,7 +48,7 @@ namespace CodeLouisvilleUnitTestProjectTests
             //arrange
             Vehicle vehicle = new Vehicle(4, 2, "Dodge", "Viper", 50);
             //act
-            vehicle.AddGas();
+            vehicle.AddGas(50);
             //assert
             vehicle.GasLevel.Should().Be("100%");
         }
@@ -58,13 +58,27 @@ namespace CodeLouisvilleUnitTestProjectTests
         [Fact]
         public void AddGasWithParameterAddsSuppliedAmountOfGas()
         {
+            Vehicle vehicle = new Vehicle(4, 10, "Audi", "Quattro", 35);
+
+            using (new AssertionScope())
+            {
+                vehicle.Make.Should().Be("Audi");
+                vehicle.Model.Should().Be("Quattro");
+                vehicle.MilesPerGallon.Should().Be(35);
+                vehicle.GasTankCapacity.Should().Be(4);
+                vehicle.NumberOfTires.Should().Be(4);
+                vehicle.GasLevel.Should().Be("0%");
+                vehicle.MilesRemaining.Should().Be(0);
+                vehicle.Mileage.Should().Be(0);
+
+            };
             //arrange
-            Vehicle sut = new Vehicle(4, 100, "", "", 30);
+            //Vehicle sut = new Vehicle(4, 100, "", "", 30);
             //act
-            double newTotal = sut._gasRemaining +sut.AddGas(5);
+            //double newTotal = sut._gasRemaining +sut.AddGas(5);
 
             //assert
-            sut.GasLevel.Should().Be($"{newTotal}%");
+            //sut.GasLevel.Should().Be($"{newTotal}%");
         }
 
         //Verify that the AddGas method with a parameter will throw
@@ -75,9 +89,13 @@ namespace CodeLouisvilleUnitTestProjectTests
             //arrange
             Vehicle vehicle = new Vehicle(4, 10, "Toyota", "Tundra", 30);
             //act
-            Action act = () => vehicle.AddGas(40);
+            vehicle.GasLevel.Should().Be("0%");
+            
+            Action gasTest = () => vehicle.AddGas(40);
             //assert
-            act.Should().Throw<GasOverfillException>();
+            //act.Should().Throw<GasOverfillException>();
+            //vehicle.GasLevel.Should().Be("100%");
+            gasTest.Should().Throw<GasOverfillException>();
         }
 
         //Using a Theory (or data-driven test), verify that the GasLevel
@@ -89,12 +107,12 @@ namespace CodeLouisvilleUnitTestProjectTests
         [InlineData("50%", 5)]
         [InlineData("75%", 7.5)]
         [InlineData("100%", 10)]
-        public void GasLevelPercentageIsCorrectForAmountOfGas(string gasTankPercent, float gasToAdd)
+        public void GasLevelPercentageIsCorrectForAmountOfGas(string gasTankPercent, float gasBeAdd)
         {
             //arrange
             Vehicle vehicle = new Vehicle(4, 10, "Subaru", "Outback", 30);
             //act
-            vehicle.AddGas(gasToAdd);
+            vehicle.AddGas(gasBeAdd);
             //assert
             vehicle.GasLevel.Should().Be(gasTankPercent);
         }

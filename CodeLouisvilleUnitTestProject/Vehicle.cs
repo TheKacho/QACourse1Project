@@ -11,7 +11,7 @@
         public string GasLevel => $"{_gasRemaining / GasTankCapacity * 100}%";
         public double MilesRemaining => _gasRemaining * MilesPerGallon;
         public double Mileage => _mileage;
-        public bool flatTire { get; set; }
+        public bool flatTire;
         #endregion
         
         #region Private Fields

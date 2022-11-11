@@ -65,7 +65,7 @@ namespace CodeLouisvilleUnitTestProjectTests
                 vehicle.Make.Should().Be("Audi");
                 vehicle.Model.Should().Be("Quattro");
                 vehicle.MilesPerGallon.Should().Be(35);
-                vehicle.GasTankCapacity.Should().Be(4);
+                vehicle.GasTankCapacity.Should().Be(10);
                 vehicle.NumberOfTires.Should().Be(4);
                 vehicle.GasLevel.Should().Be("0%");
                 vehicle.MilesRemaining.Should().Be(0);
@@ -143,20 +143,48 @@ namespace CodeLouisvilleUnitTestProjectTests
         //[InlineData(1, 0, "Gas tank empty, cannot drive.", false)]
         //[InlineData(1, 5, "One of the tires is flat, cannot drive.", true)]
         [Fact]
-        public void DriveNegativeTests()
+        public void DriveWithEmptyGasTank()
         {
             //arrange
             Vehicle vehicle = new Vehicle();
-            //act
 
-            //assert
             using (new AssertionScope())
             {
                 vehicle.Drive(0);
                 vehicle.MilesRemaining.Should().Be(0, because: "Gas tank is empty, cannot drive.");
             }
-            
         }
+
+        [Fact]
+        public void DriveWithFlatTire()
+        {
+            Vehicle vehicle = new Vehicle();
+
+            //act
+            vehicle.AddGas();
+            vehicle.Drive(100);
+            vehicle.flatTire = true;
+
+            //assert
+            vehicle.flatTire.Should().Be(true, "Cannot drive due to flat tire");
+        }
+
+
+        //[Fact]
+        //public void DriveNegativeTests()
+        //{
+        //    //arrange
+        //    Vehicle vehicle = new Vehicle();
+        //    //act
+
+        //    //assert
+        //    using (new AssertionScope())
+        //    {
+        //        vehicle.Drive(0);
+        //        vehicle.MilesRemaining.Should().Be(0, because: "Gas tank is empty, cannot drive.");
+        //    }
+            
+        //}
 
         [Theory]
         [InlineData("MysteryParamValue")]

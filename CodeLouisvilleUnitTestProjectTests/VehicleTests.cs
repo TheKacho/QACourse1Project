@@ -220,11 +220,17 @@ namespace CodeLouisvilleUnitTestProjectTests
         public async Task ChangeTireSuccessfulTest()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle(4, 100, "Volkswagon", "Golf", 30);
+
+
             //act
+            vehicle.flatTire = true;
+            await vehicle.ChangeTireAsync();
 
             //assert
-
+            vehicle.flatTire.Should().Be(false);
+            //the test results fail since there's no flat tire to change
+            //even though the
         }
 
         //BONUS: Write a unit test that verifies that a flat

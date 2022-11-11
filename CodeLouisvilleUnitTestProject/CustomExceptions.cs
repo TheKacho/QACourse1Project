@@ -8,7 +8,7 @@
         { }
     }
 
-    internal class NoTireToChangeException : Exception
+    public class NoTireToChangeException : Exception
     {
         public NoTireToChangeException()
             : base($"No flat tire to change")

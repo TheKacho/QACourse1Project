@@ -20,8 +20,15 @@ namespace CodeLouisvilleUnitTestProjectTests
             //act
 
             //assert
-            vehicle.Should().NotBeNull();
-
+            using (new AssertionScope())
+            {
+                vehicle.Model.Should().Be("");
+                vehicle.Make.Should().Be("");
+                vehicle.NumberOfTires.Should().Be(0);
+                vehicle.GasTankCapacity.Should().Be(0);
+                vehicle.MilesPerGallon.Should().Be(0);
+                vehicle.Should().NotBeNull();
+            }        
         }
 
         //Verify the parameterized constructor successfully creates a new
@@ -46,9 +53,10 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void AddGasParameterlessFillsGasToMax()
         {
             //arrange
-            Vehicle vehicle = new Vehicle(4, 2, "Dodge", "Viper", 50);
+            Vehicle vehicle = new Vehicle(4, 15, "Dodge", "Stratus", 30);
             //act
-            vehicle.AddGas(50);
+            vehicle.Drive(30);
+            vehicle.AddGas();
             //assert
             vehicle.GasLevel.Should().Be("100%");
         }
@@ -58,20 +66,12 @@ namespace CodeLouisvilleUnitTestProjectTests
         [Fact]
         public void AddGasWithParameterAddsSuppliedAmountOfGas()
         {
-            Vehicle vehicle = new Vehicle(4, 10, "Audi", "Quattro", 35);
+            Vehicle vehicle = new Vehicle(4, 15, "Audi", "Quattro", 30);
+          
+            vehicle.AddGas();
+            vehicle.Drive(90);
 
-            using (new AssertionScope())
-            {
-                vehicle.Make.Should().Be("Audi");
-                vehicle.Model.Should().Be("Quattro");
-                vehicle.MilesPerGallon.Should().Be(35);
-                vehicle.GasTankCapacity.Should().Be(10);
-                vehicle.NumberOfTires.Should().Be(4);
-                vehicle.GasLevel.Should().Be("0%");
-                vehicle.MilesRemaining.Should().Be(0);
-                vehicle.Mileage.Should().Be(0);
-
-            };
+            vehicle.GasLevel.Should().Be("80%");
             //arrange
             //Vehicle sut = new Vehicle(4, 100, "", "", 30);
             //act
@@ -208,7 +208,7 @@ namespace CodeLouisvilleUnitTestProjectTests
             Vehicle vehicle = new Vehicle(4, 10 ,"Honda", "Accord", 30);
 
             //act
-            Func<Task> tireReplace = async () => { await vehicle.ChangeTireAsync(); };
+            Func<Task> tireReplace = async () => { await vehicle.TestingChangeTireAsync(); };
             
             //assert
             await tireReplace.Should().ThrowAsync<NoTireToChangeException>();
@@ -224,13 +224,12 @@ namespace CodeLouisvilleUnitTestProjectTests
 
 
             //act
-            vehicle.flatTire = true;
-            await vehicle.ChangeTireAsync();
+            vehicle.testingFlatTire();
+            await vehicle.TestingChangeTireAsync();
 
             //assert
             vehicle.flatTire.Should().Be(false);
-            //the test results fail since there's no flat tire to change
-            //even though the
+            
         }
 
         //BONUS: Write a unit test that verifies that a flat

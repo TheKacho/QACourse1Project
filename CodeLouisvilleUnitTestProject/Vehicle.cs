@@ -106,7 +106,7 @@
             return statusString;
         }
 
-        public async Task ChangeTireAsync()
+        protected async Task ChangeTireAsync()
         {
             if (!_hasFlatTire)
                 throw new NoTireToChangeException();
@@ -115,6 +115,18 @@
                 await Task.Delay(1000);
                 _hasFlatTire = false;
             }
+        }
+
+        //method for public ChangeTireAsync testing
+        public async Task TestingChangeTireAsync()
+        {
+            await ChangeTireAsync();
+        }
+
+        //method for flat tire testing 
+        public void testingFlatTire()
+        {
+            _hasFlatTire = true;
         }
 
         /// <summary>
@@ -133,6 +145,6 @@
             Random randomNumberGenerator = new(rngSeed);
             double rand = randomNumberGenerator.NextDouble();
             return rand < probabilityOfFlatThisTrip;
-        }
+        }       
     }
 }

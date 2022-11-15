@@ -72,13 +72,7 @@ namespace CodeLouisvilleUnitTestProjectTests
             vehicle.Drive(90);
 
             vehicle.GasLevel.Should().Be("80%");
-            //arrange
-            //Vehicle sut = new Vehicle(4, 100, "", "", 30);
-            //act
-            //double newTotal = sut._gasRemaining +sut.AddGas(5);
-
-            //assert
-            //sut.GasLevel.Should().Be($"{newTotal}%");
+            
         }
 
         //Verify that the AddGas method with a parameter will throw

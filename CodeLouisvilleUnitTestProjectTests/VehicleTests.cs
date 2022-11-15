@@ -177,20 +177,42 @@ namespace CodeLouisvilleUnitTestProjectTests
         //        vehicle.Drive(0);
         //        vehicle.MilesRemaining.Should().Be(0, because: "Gas tank is empty, cannot drive.");
         //    }
-            
+
+        //}
+
+        //[Theory]
+        //[InlineData("MysteryParamValue")]
+        //public void DrivePositiveTests(params object[] yourParamsHere)
+        //{
+        //    //arrange
+        //    throw new NotImplementedException();
+        //    //act
+
+        //    //assert
+
         //}
 
         [Theory]
-        [InlineData("MysteryParamValue")]
-        public void DrivePositiveTests(params object[] yourParamsHere)
+        [InlineData(0)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(500)]
+        public void SpecificDriveTest(int testDriveInput)
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle(4, 10, "Subaru", "Outback", 30);
+            double testDistance = testDriveInput;
+            var startingMileage = vehicle.Mileage;
+            var currentMileage = vehicle.MilesPerGallon * vehicle.GasTankCapacity;
+            double testGasRemain = (currentMileage - testDistance) / currentMileage * 100);
+
+            var gasUsage = Math.Round(testDistance / vehicle.MilesPerGallon, 2);
+
             //act
-
-            //assert
-
+            vehicle.AddGas();
+            var currentGasLevels = Math.Round(double.Parse(vehicle.GasLevel))
         }
+
 
         //Verify that attempting to change a flat tire using
         //ChangeTireAsync will throw a NoTireToChangeException

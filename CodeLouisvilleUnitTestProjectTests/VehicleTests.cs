@@ -210,7 +210,7 @@ namespace CodeLouisvilleUnitTestProjectTests
 
             //act
             vehicle.AddGas();
-            var currentGasLevels = Math.Round(double.Parse(vehicle.GasLevel))
+            var currentGasLevels = Math.Round(double.Parse(vehicle.GasLevel));
         }
 
 

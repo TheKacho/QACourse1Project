@@ -10,10 +10,13 @@ namespace CodeLouisvilleUnitTestProject
 {
     public class CarApiInfo
     {
-        public string CarMake { get; set; }
-        [JsonPropertyName("Car_Make")]
+        public string MakeName { get; set; }
+        [JsonPropertyName("Make_Name")]
 
-        public string CarModel{ get; set; }
-        [JsonPropertyName("Car_Model")]
+        public string ModelName { get; set; }
+        [JsonPropertyName("Model_Name")]
+
+        public int MakeID { get; set; }
+        [JsonPropertyName("Make_ID")]
     }
 }

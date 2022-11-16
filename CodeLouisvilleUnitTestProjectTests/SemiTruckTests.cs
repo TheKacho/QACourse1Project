@@ -93,12 +93,12 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
-            CargoItem cargoItem = new CargoItem();
+            
 
             //act
-            Action act = () => semiTruck.GetCargoItemsByName("product");
+            Action act = () => semiTruck.UnloadCargo("product");
             //assert
-            act.Should().NotBeNull(because: "If it returns no match after searching cargo item list, then an empty list is returned.");
+            //act.Should().NotBeNull(because: "If it returns no match after searching cargo item list, then an empty list is returned.");
             act.Should().Throw<ArgumentException>()
                 .WithMessage("Can't deliver that, sorry.");
         }
@@ -116,9 +116,9 @@ namespace CodeLouisvilleUnitTestProjectTests
             item.Description = "Package of shirts";
             item.Name = "Shirts";
             //act
-
+            Action act = () => semiTruck.GetCargoItemsByName("Shirts");
             //assert
-            semiTruck.GetCargoItemsByPartialDescription("shirts");
+            act.Should().ToString();
             semiTruck.Cargo.Should().Contain(item, because: "shirts");
         }
 
@@ -129,13 +129,14 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
-            CargoItem item = new CargoItem() { Name = "Jackets", Description = "case of jackets", Quantity = 10 };
-            CargoItem banana = new CargoItem() { Name = "Banana", Description = "case full of bananas", Quantity = 50 };
+            CargoItem cargoItem = new CargoItem();
 
             //act
-            semiTruck.GetCargoItemsByPartialDescription("bananas");
+
+
             //assert
-            semiTruck.Cargo.Should().NotContain(banana, because:"Why would we carry Donkey Kong's bananas?" );
+            Action act = () => semiTruck.GetCargoItemsByName("package");
+            act.Should().NotBeNull(because: "Returned an empty list because no name called 'package' exists.");
         }
 
         //Verify that searching the Cargo list by description for an item
@@ -166,11 +167,15 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GetCargoItemsByPartialDescriptionWithInvalidDescription()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
+            CargoItem item = new CargoItem() { Name = "Jackets", Description = "case of jackets", Quantity = 10 };
+            CargoItem banana = new CargoItem() { Name = "Banana", Description = "case full of bananas", Quantity = 50 };
+
             //act
-
+            semiTruck.GetCargoItemsByPartialDescription("banana");
+            semiTruck.GetCargoItemsByPartialDescription("c");
             //assert
-
+            semiTruck.Cargo.Should().NotContain(banana, because: "Why are we describing Donkey Kong's bananas?");
         }
 
         //Verify that the method returns the sum of all quantities of all
@@ -179,11 +184,21 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GetTotalNumberOfItemsReturnsSumOfAllQuantities()
         {
             //arrange
-            throw new NotImplementedException();
-            //act
+            List<CargoItem> item = new List<CargoItem>();
+            SemiTruck semiTruck = new SemiTruck();      
+            CargoItem broccoli = new CargoItem() { Name = "Broccoli", Description = "florets of broccoli", Quantity = 200 };
+            CargoItem celery = new CargoItem() { Name = "Celery", Description = "stalks of celery", Quantity = 500 };
 
+            //act
+            int totalItemSum = 0;
+            semiTruck.Cargo.Add(broccoli);
+            semiTruck.Cargo.Add(celery);
+            totalItemSum = broccoli.Quantity + celery.Quantity;
+
+            semiTruck.GetTotalNumberOfItems();
             //assert
 
+            totalItemSum.Should().Be(700);
         }
     }
 }

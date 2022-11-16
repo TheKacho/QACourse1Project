@@ -190,15 +190,15 @@ namespace CodeLouisvilleUnitTestProjectTests
             CargoItem celery = new CargoItem() { Name = "Celery", Description = "stalks of celery", Quantity = 500 };
 
             //act
-            int totalItemSum = 0;
+            int total = 0;
             semiTruck.Cargo.Add(broccoli);
             semiTruck.Cargo.Add(celery);
-            totalItemSum = broccoli.Quantity + celery.Quantity;
+            total = broccoli.Quantity + celery.Quantity;
 
             semiTruck.GetTotalNumberOfItems();
             //assert
 
-            totalItemSum.Should().Be(700);
+            total.Should().Be(700);
         }
     }
 }

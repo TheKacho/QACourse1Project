@@ -91,22 +91,8 @@ namespace CodeLouisvilleUnitTestProject
         public int GetTotalNumberOfItems()
         {
             //YOUR CODE HERE
-            //create new list 
-            List<CargoItem> cargoItems = new List<CargoItem>();
-
-            //form quantity values to 0 by default
-            int quantity = 0;
-            int total = 0;
-            int subTotal = 0;
-
-            //form the solution in order to add up total sum
-            foreach(CargoItem item in cargoItems)
-            {
-                item.Quantity = quantity;
-                subTotal += quantity;
-            }
-            total = quantity + subTotal;
-            return total;
+            int cargoSum = Cargo.Count;
+            return cargoSum;
         }
     }
 }

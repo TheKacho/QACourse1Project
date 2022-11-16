@@ -15,11 +15,17 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void NewSemiTruckIsAVehicleAndHas18TiresAndEmptyCargoTest()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
 
             //assert
-            
+            using (new AssertionScope())
+            {
+                semiTruck.NumberOfTires.Should().Be(18);
+                semiTruck.Cargo.Should().BeOfType<List<CargoItem>>();
+                semiTruck.Cargo.Should().BeEmpty();
+                semiTruck.Cargo.Should().NotBeNull();
+            };
         }
 
         //Verify that adding a CargoItem using LoadCargo does successfully add
@@ -29,10 +35,37 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void LoadCargoTest()
         {
             //arrange
-            throw new NotImplementedException();
+
+            SemiTruck semiTruck = new SemiTruck();
+            CargoItem product = new CargoItem();
+            //cargoItem.Name = "ItemToBeRemoved";
+
             //act
 
-            //assert
+            semiTruck.LoadCargo(product);
+
+            //semiTruck.LoadCargo(cargoItem);
+
+            //using (new AssertionScope())
+            //{
+            //    semiTruck.Cargo.Should().Contain(cargoItem);
+            //    semiTruck.Cargo.Count.Should().Be(1);
+            //}
+            //CargoItem removeThisItem = semiTruck.UnloadCargo(RemoveCargoItem);
+
+            ////assert
+            
+            
+            semiTruck.Cargo.Should().Contain(product);
+            semiTruck.Cargo.Remove(product);
+
+            semiTruck.Cargo.Should().NotContain(product);
+            //using (new AssertionScope())
+            //{
+            //    semiTruck.Cargo.Count().Should().Be(0);
+            //    semiTruck.Cargo.Should().NotContain(cargoItem);
+            //    removeThisItem.Should().Be(cargoItem);
+            //}
 
         }
 

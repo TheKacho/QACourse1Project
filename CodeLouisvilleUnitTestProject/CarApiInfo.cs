@@ -10,6 +10,7 @@ namespace CodeLouisvilleUnitTestProject
 {
     public class CarApiInfo
     {
+        
         public string MakeName { get; set; }
         [JsonPropertyName("Make_Name")]
 
@@ -17,6 +18,6 @@ namespace CodeLouisvilleUnitTestProject
         [JsonPropertyName("Model_Name")]
 
         public int MakeID { get; set; }
-        [JsonPropertyName("Make_ID")]
+        
     }
 }

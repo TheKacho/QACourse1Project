@@ -75,11 +75,15 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void UnloadCargoWithValidCargoTest()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
+            CargoItem product = new CargoItem();
             //act
 
+            semiTruck.LoadCargo(product);
+            semiTruck.Cargo.Should().Contain(product);
+            semiTruck.Cargo.Remove(product);
             //assert
-
+            semiTruck.Cargo.Should().NotContain(product);
         }
 
         //Verify that attempting to unload a CargoItem that does not
@@ -88,11 +92,15 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void UnloadCargoWithInvalidCargoTest()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
+            CargoItem cargoItem = new CargoItem();
+
             //act
-
+            Action act = () => semiTruck.GetCargoItemsByName("product");
             //assert
-
+            act.Should().NotBeNull(because: "If it returns no match after searching cargo item list, then an empty list is returned.");
+            act.Should().Throw<ArgumentException>()
+                .WithMessage("Can't deliver that, sorry.");
         }
 
         //Verify that getting cargo items by name returns all items
@@ -101,24 +109,33 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GetCargoItemsByNameWithValidName()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
+            CargoItem item = new CargoItem();
+            semiTruck.Cargo.Add(item);
+            item.Quantity = 5;
+            item.Description = "Package of shirts";
+            item.Name = "Shirts";
             //act
 
             //assert
-
+            semiTruck.GetCargoItemsByPartialDescription("shirts");
+            semiTruck.Cargo.Should().Contain(item, because: "shirts");
         }
 
-        //Verify that searching the Carto list for an item that does not
+        //Verify that searching the Cargo list for an item that does not
         //exist returns an empty list
         [Fact]
         public void GetCargoItemsByNameWithInvalidName()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
+            CargoItem item = new CargoItem() { Name = "Jackets", Description = "case of jackets", Quantity = 10 };
+            CargoItem banana = new CargoItem() { Name = "Banana", Description = "case full of bananas", Quantity = 50 };
+
             //act
-
+            semiTruck.GetCargoItemsByPartialDescription("bananas");
             //assert
-
+            semiTruck.Cargo.Should().NotContain(banana, because:"Why would we carry Donkey Kong's bananas?" );
         }
 
         //Verify that searching the Cargo list by description for an item
@@ -127,11 +144,20 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GetCargoItemsByPartialDescriptionWithValidDescription()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
+            CargoItem item = new CargoItem
+            {
+                Name = "Bell peppers",
+                Description = "Box of bell peppers for salad mix",
+                Quantity = 10
+                
+            };
+            semiTruck.Cargo.Add(item);
             //act
 
             //assert
-
+            semiTruck.GetCargoItemsByPartialDescription("bell peppers");
+            semiTruck.Cargo.Should().Contain(item, because: "Swedish Chef needs to make a salad ASAP!");
         }
 
         //Verify that searching the Carto list by description for an item

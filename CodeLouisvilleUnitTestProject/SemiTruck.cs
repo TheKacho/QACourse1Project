@@ -16,6 +16,11 @@ namespace CodeLouisvilleUnitTestProject
             NumberOfTires = 18;
             Cargo = new List<CargoItem>();
         }
+        public SemiTruck(int numberOfTires)
+        {
+            Cargo = new List<CargoItem>();
+            NumberOfTires = numberOfTires;
+        }
 
         /// <summary>
         /// Adds the passed CargoItem to the Cargo
@@ -32,19 +37,19 @@ namespace CodeLouisvilleUnitTestProject
         /// <param name="name">The name of the CargoItem to attempt to remove</param>
         /// <returns>The removed CargoItem</returns>
         /// <exception cref="ArgumentException">Thrown if no CargoItem in the Cargo matches the passed name</exception>
-        public CargoItem UnloadCargo(string name)
+        public List<CargoItem> UnloadCargo(string name)
         {
             //YOUR CODE HERE
+            var RemoveCargoItem = Cargo.FirstOrDefault(CargoItem => CargoItem.Name == name);
             if(name != null)
             {
-                Cargo[0].Name = name;
-                Cargo.RemoveAt(0);
-                return Cargo[0];
+                Cargo.Remove(RemoveCargoItem);
             }
             else
             {
                 throw new ArgumentException();
             }
+            return Cargo;
         }
 
         /// <summary>

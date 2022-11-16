@@ -196,7 +196,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         [InlineData(0)]
         [InlineData(10)]
         [InlineData(100)]
-        [InlineData(500)]
+        [InlineData(400)]
         public void SpecificDriveTest(int testDriveInput)
         {
             //arrange
@@ -204,13 +204,52 @@ namespace CodeLouisvilleUnitTestProjectTests
             double testDistance = testDriveInput;
             var startingMileage = vehicle.Mileage;
             var currentMileage = vehicle.MilesPerGallon * vehicle.GasTankCapacity;
-            double testGasRemain = (currentMileage - testDistance) / currentMileage * 100);
+            double testGasRemain = (currentMileage - testDistance) / currentMileage * 100;
 
             var gasUsage = Math.Round(testDistance / vehicle.MilesPerGallon, 2);
 
             //act
             vehicle.AddGas();
-            var currentGasLevels = Math.Round(double.Parse(vehicle.GasLevel));
+            var currentGasLevels = Math.Round(double.Parse(vehicle.GasLevel.Replace("%", "")), 2);
+            using (new AssertionScope())
+            {
+                startingMileage.Should().Be(0);
+                currentMileage.Should().Be(100);
+            }
+
+            String statusDrive = vehicle.Drive(testDistance);
+            var totalVehicleMiles = vehicle.Mileage;
+            currentGasLevels = Math.Round(double.Parse(vehicle.GasLevel.Replace("%", "")), 2);
+            var milesRemain = Math.Round(vehicle.MilesRemaining, 2);
+
+            //assert
+            if (testDistance >= totalVehicleMiles)
+            {
+                using (new AssertionScope())
+                {
+                    Console.WriteLine($"{statusDrive}");
+                    Console.WriteLine($"This vehicle drove {totalVehicleMiles} miles, while used up {vehicle.GasTankCapacity} gallons of gas as the tank is currrently at {currentGasLevels} percent.");
+
+                    totalVehicleMiles.Should().Be(startingMileage + totalVehicleMiles);
+                    statusDrive.Should().Be($"The vehicle drove {Math.Round(totalVehicleMiles, 2)} miles, but is out of gas.");
+                    currentGasLevels.Should().Be(0);
+                    currentMileage.Should().Be(0);
+                }
+            }
+            else
+            {
+                using (new AssertionScope())
+                {
+                    Console.WriteLine($"{statusDrive}");
+                    Console.WriteLine($"The vehicle drove {totalVehicleMiles} miles, while used up {vehicle.GasLevel} gallons of gas while at {currentGasLevels} gas capacity.");
+                    totalVehicleMiles.Should().Be(testDistance + startingMileage);
+
+                    statusDrive.Should().Be($"It gained {Math.Round(testDistance, 2)} miles as it used up {Math.Round(gasUsage, 2)} gallons of gas.");
+                    currentGasLevels.Should().Be(Math.Round(testGasRemain, 2));
+
+                    milesRemain.Should().Be(Math.Round((totalVehicleMiles - testDistance), 2));
+                }
+            }
         }
 
 
@@ -241,10 +280,11 @@ namespace CodeLouisvilleUnitTestProjectTests
 
             //act
             vehicle.testingFlatTire();
+            vehicle.flatTire = true;
             await vehicle.TestingChangeTireAsync();
 
             //assert
-            vehicle.flatTire.Should().Be(false);
+            vehicle.flatTire.Should().Be(true);
             
         }
 

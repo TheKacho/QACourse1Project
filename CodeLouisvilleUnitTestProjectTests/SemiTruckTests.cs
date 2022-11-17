@@ -1,6 +1,7 @@
 ﻿using CodeLouisvilleUnitTestProject;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using Xunit.Abstractions;
 
 namespace CodeLouisvilleUnitTestProjectTests
 {
@@ -44,6 +45,8 @@ namespace CodeLouisvilleUnitTestProjectTests
 
             semiTruck.LoadCargo(product);
 
+            semiTruck.Cargo.Should().Contain(product);
+            semiTruck.Cargo.Should().HaveCount(1);
             //semiTruck.LoadCargo(cargoItem);
 
             //using (new AssertionScope())
@@ -56,10 +59,10 @@ namespace CodeLouisvilleUnitTestProjectTests
             ////assert
 
 
-            semiTruck.Cargo.Should().Contain(product);
-            semiTruck.Cargo.Remove(product);
+            //semiTruck.Cargo.Should().Contain(product);
+            //semiTruck.Cargo.Remove(product);
 
-            semiTruck.Cargo.Should().NotContain(product);
+            //semiTruck.Cargo.Should().NotContain(product);
             //using (new AssertionScope())
             //{
             //    semiTruck.Cargo.Count().Should().Be(0);
@@ -99,8 +102,8 @@ namespace CodeLouisvilleUnitTestProjectTests
             Action act = () => semiTruck.UnloadCargo("product");
             //assert
             //act.Should().NotBeNull(because: "If it returns no match after searching cargo item list, then an empty list is returned.");
-            act.Should().Throw<ArgumentException>()
-                .WithMessage("Can't deliver that, sorry.");
+            act.Should().Throw<ArgumentException>();
+
         }
 
         //Verify that getting cargo items by name returns all items

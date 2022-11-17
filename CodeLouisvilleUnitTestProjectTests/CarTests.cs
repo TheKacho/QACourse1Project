@@ -50,6 +50,7 @@ namespace CodeLouisvilleUnitTestProjectTests
 
         // if the model and make do not match regardless of year will return false
         [Theory]
+        [InlineData("Mazda", "Corolla", 1995, false)]
         [InlineData("Mitsubishi", "Tundra", 2003, false)]
         [InlineData("Honda", "Camry", 1999, false)]
         [InlineData("Subaru", "WRX", 2020, true)]
@@ -62,11 +63,27 @@ namespace CodeLouisvilleUnitTestProjectTests
             result.Should().Be(expected);
         }
 
-        
+
         // this next theory tests if each model is made in 1995
         // passes if the car is made in 1995
         // if it is made before 1995, then it raises a system exception message
 
-        
+        [Theory]
+        [InlineData ("Honda", "Civic", 1996)]
+        [InlineData ("Honda", "Civic", 1995)]
+        [InlineData ("Honda", "Civic", 1994)]
+        [InlineData ("Honda", "Civic", 1993)]
+        public async Task IsModelMadeInOrBeforeYear1995(string make, string model, int year)
+        {
+            var car = new Car(20, make, model, 40);
+            Func<Task> act = async () => { await car.WasModelMadeInYearAsync(year); };
+            act.Should().ThrowAsync<ArgumentException>()
+                .WithMessage("No data available any models made prior to 1995.");
+        }
+
+        //This theory tests whenever passengers are added to the car model
+        //then it should decrease fuel economy by .2 per passenger
+        //[Theory]
+        //[InlineData()]
     }
 }

@@ -193,64 +193,28 @@ namespace CodeLouisvilleUnitTestProjectTests
         //}
 
         [Theory]
-        [InlineData(0)]
-        [InlineData(10)]
-        [InlineData(100)]
-        [InlineData(400)]
-        public void SpecificDriveTest(int testDriveInput)
+        [InlineData(0, 0)]
+        [InlineData(.333, 10)]
+        [InlineData(3.333, 100)]
+        public void DrivePositiveTests(double gasUsed, double milesDrove)
         {
             //arrange
-            Vehicle vehicle = new Vehicle(4, 10, "Subaru", "Outback", 30);
-            double testDistance = testDriveInput;
-            var startingMileage = vehicle.Mileage;
-            var currentMileage = vehicle.MilesPerGallon * vehicle.GasTankCapacity;
-            double testGasRemain = (currentMileage - testDistance) / currentMileage * 100;
-
-            var gasUsage = Math.Round(testDistance / vehicle.MilesPerGallon, 2);
-
-            //act
-            vehicle.AddGas();
-            var currentGasLevels = Math.Round(double.Parse(vehicle.GasLevel.Replace("%", "")), 2);
             using (new AssertionScope())
             {
-                startingMileage.Should().Be(0);
-                currentMileage.Should().Be(100);
-            }
+                Vehicle vehicle = new Vehicle(4, 10, "Volkswagon", "Beetle", 30);
+                double startMiles = vehicle.Mileage;
+                double endMiles = vehicle.Mileage;
 
-            String statusDrive = vehicle.Drive(testDistance);
-            var totalVehicleMiles = vehicle.Mileage;
-            currentGasLevels = Math.Round(double.Parse(vehicle.GasLevel.Replace("%", "")), 2);
-            var milesRemain = Math.Round(vehicle.MilesRemaining, 2);
+                Action act = () => vehicle.Drive(milesDrove);
 
-            //assert
-            if (testDistance >= totalVehicleMiles)
-            {
-                using (new AssertionScope())
-                {
-                    Console.WriteLine($"{statusDrive}");
-                    Console.WriteLine($"This vehicle drove {totalVehicleMiles} miles, while used up {vehicle.GasTankCapacity} gallons of gas as the tank is currrently at {currentGasLevels} percent.");
+                milesDrove.Should().BeApproximately(gasUsed * vehicle.MilesPerGallon, .01);
+                vehicle.GasLevel.Should().Be($"{vehicle.leftoverGas / vehicle.GasTankCapacity}%");
+                vehicle.MilesRemaining.Should().BeApproximately(vehicle.leftoverGas * vehicle.MilesPerGallon, .01);
+                endMiles.Should().Be(startMiles + milesDrove);
 
-                    totalVehicleMiles.Should().Be(startingMileage + totalVehicleMiles);
-                    statusDrive.Should().Be($"The vehicle drove {Math.Round(totalVehicleMiles, 2)} miles, but is out of gas.");
-                    currentGasLevels.Should().Be(0);
-                    currentMileage.Should().Be(0);
-                }
-            }
-            else
-            {
-                using (new AssertionScope())
-                {
-                    Console.WriteLine($"{statusDrive}");
-                    Console.WriteLine($"The vehicle drove {totalVehicleMiles} miles, while used up {vehicle.GasLevel} gallons of gas while at {currentGasLevels} gas capacity.");
-                    totalVehicleMiles.Should().Be(testDistance + startingMileage);
-
-                    statusDrive.Should().Be($"It gained {Math.Round(testDistance, 2)} miles as it used up {Math.Round(gasUsage, 2)} gallons of gas.");
-                    currentGasLevels.Should().Be(Math.Round(testGasRemain, 2));
-
-                    milesRemain.Should().Be(Math.Round((totalVehicleMiles - testDistance), 2));
-                }
             }
         }
+       
 
 
         //Verify that attempting to change a flat tire using

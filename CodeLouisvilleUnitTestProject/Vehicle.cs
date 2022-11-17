@@ -11,6 +11,8 @@
         public string GasLevel => $"{_gasRemaining / GasTankCapacity * 100}%";
         public double MilesRemaining => _gasRemaining * MilesPerGallon;
         public double Mileage => _mileage;
+        public double leftoverGas { get { return _gasRemaining; } set { _gasRemaining = value; } }
+
         public bool flatTire;
         #endregion
 
@@ -36,6 +38,7 @@
             Model = model;
             MilesPerGallon = milesPerGallon;
         }
+
 
         /// <summary>
         /// Adds gas up to the maximum amount of gas the tank can hold
@@ -65,6 +68,7 @@
 
         public string Drive(double miles)
         {
+            double milesRemaining = MilesRemaining;
             bool ableToDrive = false;
             string statusString;
             if (MilesRemaining == 0)

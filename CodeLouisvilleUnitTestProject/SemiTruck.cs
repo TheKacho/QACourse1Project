@@ -61,6 +61,7 @@
             {
                 cargoItem.Name = name;
             }
+            //should return a list of cargo items with names criteria
             return cargoItems;
         }
 
@@ -77,6 +78,8 @@
             {
                 cargoItem.Description = description;
             }
+            //returns a list of all items with descriptions
+            Cargo.FindAll(cargoItems => cargoItems.Description == description).ToList();
             return cargoItems;
         }
 

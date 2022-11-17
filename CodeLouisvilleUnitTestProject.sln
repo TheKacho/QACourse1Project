@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeLouisvilleUnitTestProject", "CodeLouisvilleUnitTestProject\CodeLouisvilleUnitTestProject.csproj", "{5A382F19-26F2-46F9-9FEF-121E987FDD1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeLouisvilleUnitTestProjectTests", "CodeLouisvilleUnitTestProjectTests\CodeLouisvilleUnitTestProjectTests.csproj", "{1E0B4A6C-DA3A-4218-868F-0BDC812C545B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeLouisvilleUnitTestProjectTests", "CodeLouisvilleUnitTestProjectTests\CodeLouisvilleUnitTestProjectTests.csproj", "{1E0B4A6C-DA3A-4218-868F-0BDC812C545B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

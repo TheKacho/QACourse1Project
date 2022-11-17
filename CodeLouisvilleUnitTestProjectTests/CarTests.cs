@@ -37,5 +37,15 @@ namespace CodeLouisvilleUnitTestProjectTests
                 car.MilesPerGallon.Should().Be(30);
             }
         }
+
+        [Theory]
+        [InlineData ("Honda", "Accord", true)]
+        [InlineData("Honda", "Camry", false)]
+        public async Task ModelValidator(string make, string model, bool expected)
+        {
+            var car = new Car(10, make, model, 30);
+            bool result = await car.IsValidModelForMakeAsync();
+            result.Should().Be(expected);
+        }
     }
 }

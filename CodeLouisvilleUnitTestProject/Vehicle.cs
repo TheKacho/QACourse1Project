@@ -13,13 +13,13 @@
         public double Mileage => _mileage;
         public bool flatTire;
         #endregion
-        
+
         #region Private Fields
         private double _gasRemaining;
         private double _mileage;
         private bool _hasFlatTire;
         #endregion
-       
+
         #region Private Properties
         private double _flatTireChance => 0.0001 * NumberOfTires;
         #endregion       
@@ -145,6 +145,6 @@
             Random randomNumberGenerator = new(rngSeed);
             double rand = randomNumberGenerator.NextDouble();
             return rand < probabilityOfFlatThisTrip;
-        }       
+        }
     }
 }

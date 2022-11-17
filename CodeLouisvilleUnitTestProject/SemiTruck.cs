@@ -1,8 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Linq;
-
-namespace CodeLouisvilleUnitTestProject
+﻿namespace CodeLouisvilleUnitTestProject
 {
     public class SemiTruck : Vehicle
     {
@@ -41,7 +37,7 @@ namespace CodeLouisvilleUnitTestProject
         {
             //YOUR CODE HERE
             var RemoveCargoItem = Cargo.FirstOrDefault(CargoItem => CargoItem.Name == name);
-            if(name != null)
+            if (name != null)
             {
                 Cargo.Remove(RemoveCargoItem);
             }
@@ -77,7 +73,7 @@ namespace CodeLouisvilleUnitTestProject
         {
             //YOUR CODE HERE
             List<CargoItem> cargoItems = new List<CargoItem>();
-            foreach(CargoItem cargoItem in cargoItems)
+            foreach (CargoItem cargoItem in cargoItems)
             {
                 cargoItem.Description = description;
             }
@@ -100,7 +96,7 @@ namespace CodeLouisvilleUnitTestProject
             int subTotal = 0;
 
             //form the solution in order to add up total sum
-            foreach(CargoItem item in cargoItems)
+            foreach (CargoItem item in cargoItems)
             {
                 item.Quantity = quantity;
                 subTotal += quantity;

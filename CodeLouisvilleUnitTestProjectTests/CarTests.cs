@@ -83,7 +83,18 @@ namespace CodeLouisvilleUnitTestProjectTests
 
         //This theory tests whenever passengers are added to the car model
         //then it should decrease fuel economy by .2 per passenger
-        //[Theory]
-        //[InlineData()]
+        [Theory]
+        [InlineData(5, 30, 29.0)]
+        [InlineData(4, 30, 29.2)]
+        [InlineData(3, 30, 29.4)]
+        [InlineData(2, 30, 29.6)]
+        [InlineData(1, 30, 29.8)]
+        [InlineData(0, 30, 30)]
+        public void GetPassengers(int passengers, double mpg, double result)
+        {
+            var car = new Car(15, "Toyota", "Camry", mpg);
+            car.AddPassengers(passengers);
+            car.MilesPerGallon.Should().Be(result);
+        }
     }
 }

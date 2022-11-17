@@ -133,9 +133,7 @@ namespace CodeLouisvilleUnitTestProjectTests
          *      is correct, and that the total mileage on the vehicle is 
          *      correct. Verify that the status reports the car is out of gas.
         */
-        //[Theory]
-        //[InlineData(1, 0, "Gas tank empty, cannot drive.", false)]
-        //[InlineData(1, 5, "One of the tires is flat, cannot drive.", true)]
+        
         [Fact]
         public void DriveWithEmptyGasTank()
         {

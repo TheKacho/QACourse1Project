@@ -47,5 +47,26 @@ namespace CodeLouisvilleUnitTestProjectTests
             bool result = await car.IsValidModelForMakeAsync();
             result.Should().Be(expected);
         }
+
+        // if the model and make do not match regardless of year will return false
+        [Theory]
+        [InlineData("Mitsubishi", "Tundra", 2003, false)]
+        [InlineData("Honda", "Camry", 1999, false)]
+        [InlineData("Subaru", "WRX", 2020, true)]
+        [InlineData("Subaru", "WRX", 2000, false)]
+
+        public async Task IsModelMadeInYearAsync(string make, string model, int year, bool expected)
+        {
+            var car = new Car(10, make, model, 40);
+            bool result = await car.WasModelMadeInYearAsync(year);
+            result.Should().Be(expected);
+        }
+
+        
+        // this next theory tests if each model is made in 1995
+        // passes if the car is made in 1995
+        // if it is made before 1995, then it raises a system exception message
+
+
     }
 }

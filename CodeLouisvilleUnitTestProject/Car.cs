@@ -23,17 +23,16 @@ namespace CodeLouisvilleUnitTestProject
         { }
 
         public Car(double gasTankCapacity, string make, string model, double milesPerGallon)
+            : base(4, gasTankCapacity, make, model, milesPerGallon)
         {
-            NumberOfTires = 4;
-            GasTankCapacity = gasTankCapacity;
-            Make = make;
-            Model = model;
-            MilesPerGallon = milesPerGallon;
+            // the base model for a regular car with 4 tires, its gas tank cap
+            // make, model and how many miles per gallon it has
         }
+        
 
         public async Task<bool> IsValidModelForMakeAsync()
         {
-            string locatepoint = $"vehicles/getmodelsfromale/{base.Make}?format.json";
+            string locatepoint = $"vehicles/getmodelsformake/{base.Make}?format=json";
             string response = await _client.GetStringAsync(locatepoint);
             CarRootRespond resObject = JsonSerializer.Deserialize<CarRootRespond>(response);
             List<Result> models = resObject.Results.ToList();

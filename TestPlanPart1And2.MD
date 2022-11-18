@@ -16,7 +16,7 @@ Test Plan Execution for the Shopping Cart Feature with Bug Reports
 - test device (HP ProBook with Intel Core i5 processor)
 - Browser used: Firefox 106.0.5 64-Bit
 
-###| Bug Report |
+##| Bug Report |
 - Item limit that was capped at 5 can go over that limit without giving the error to the user
 
 ## | Recreating the bug |

@@ -133,9 +133,6 @@ namespace CodeLouisvilleUnitTestProjectTests
          *      is correct, and that the total mileage on the vehicle is 
          *      correct. Verify that the status reports the car is out of gas.
         */
-        //[Theory]
-        //[InlineData(1, 0, "Gas tank empty, cannot drive.", false)]
-        //[InlineData(1, 5, "One of the tires is flat, cannot drive.", true)]
         [Fact]
         public void DriveWithEmptyGasTank()
         {
@@ -162,35 +159,7 @@ namespace CodeLouisvilleUnitTestProjectTests
             //assert
             vehicle.flatTire.Should().Be(true, "Cannot drive due to flat tire");
         }
-
-
-        //[Fact]
-        //public void DriveNegativeTests()
-        //{
-        //    //arrange
-        //    Vehicle vehicle = new Vehicle();
-        //    //act
-
-        //    //assert
-        //    using (new AssertionScope())
-        //    {
-        //        vehicle.Drive(0);
-        //        vehicle.MilesRemaining.Should().Be(0, because: "Gas tank is empty, cannot drive.");
-        //    }
-
-        //}
-
-        //[Theory]
-        //[InlineData("MysteryParamValue")]
-        //public void DrivePositiveTests(params object[] yourParamsHere)
-        //{
-        //    //arrange
-        //    throw new NotImplementedException();
-        //    //act
-
-        //    //assert
-
-        //}
+     
 
         [Theory]
         [InlineData(0, 0)]

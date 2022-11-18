@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeLouisvilleUnitTestProje
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeLouisvilleUnitTestProjectTests", "CodeLouisvilleUnitTestProjectTests\CodeLouisvilleUnitTestProjectTests.csproj", "{1E0B4A6C-DA3A-4218-868F-0BDC812C545B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestPlanPart1and2", "TestPlanPart1and2", "{497D99BB-011E-48D9-A54F-5D33E9AC5D0F}"
+	ProjectSection(SolutionItems) = preProject
+		TestPlanPart1And2.MD = TestPlanPart1And2.MD
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

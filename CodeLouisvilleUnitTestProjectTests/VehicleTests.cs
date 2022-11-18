@@ -223,16 +223,16 @@ namespace CodeLouisvilleUnitTestProjectTests
 
         //BONUS: Write a unit test that verifies that a flat
         //tire will occur after a certain number of miles.
-        [Theory]
-        [InlineData("MysteryParamValue")]
-        public void GetFlatTireAfterCertainNumberOfMilesTest(params object[] yourParamsHere)
-        {
-            //arrange
-            throw new NotImplementedException();
-            //act
+        //[Theory]
+        //[InlineData("MysteryParamValue")]
+        //public void GetFlatTireAfterCertainNumberOfMilesTest(params object[] yourParamsHere)
+        //{
+        //    //arrange
+        //    throw new NotImplementedException();
+        //    //act
 
-            //assert
+        //    //assert
 
-        }
+        //}
     }
 }

@@ -96,5 +96,42 @@ namespace CodeLouisvilleUnitTestProjectTests
             car.AddPassengers(passengers);
             car.MilesPerGallon.Should().Be(result);
         }
+
+        [Theory]
+        [InlineData(5, 30, 29.0)]
+        [InlineData(4, 30, 29.2)]
+        [InlineData(3, 30, 29.4)]
+        [InlineData(2, 30, 29.6)]
+        [InlineData(1, 30, 29.8)]
+        [InlineData(0, 30, 30)]
+        public void GetPassengersAndDropOff(int howMany, double mpg, double result)
+        {
+            var car = new Car(15, "Toyota", "Camry", mpg);
+            car.AddPassengers(howMany);
+            car.MilesPerGallon.Should().Be(result);
+
+            //then drop them off at destination 
+            //and the mpg should increase back to capacity
+            car.RemovePassengers(howMany);
+            car.MilesPerGallon.Should().Be(mpg);
+        }
+
+        //this theory tests the criteria of removing passengers
+        // from each vehicle would increase mpg
+        [Theory]
+        [InlineData(5, 21, 3, 2, 20.6)]
+        [InlineData(5, 21, 5, 0, 21)]
+        [InlineData(5, 21, 25, 0, 21)]
+        public void RemovePassengers(int passengerInCar, double mpg, int howMany, int passengerLeftOver, double mpgResult)
+        {
+            var car = new Car(15, "Chevolet", "Impala", mpg);
+            car.AddPassengers(passengerInCar);
+            car.RemovePassengers(howMany);
+            using (new AssertionScope())
+            {
+                car.NumberOfPassenger.Should().Be(passengerLeftOver);
+                car.MilesPerGallon.Should().Be(mpgResult);
+            }
+        }
     }
 }

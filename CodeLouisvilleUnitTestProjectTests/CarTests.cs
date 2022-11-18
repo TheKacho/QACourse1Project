@@ -79,6 +79,8 @@ namespace CodeLouisvilleUnitTestProjectTests
             Func<Task> act = async () => { await car.WasModelMadeInYearAsync(year); };
             act.Should().ThrowAsync<ArgumentException>()
                 .WithMessage("No data available any models made prior to 1995.");
+
+            //pardon the red squiggle marks, the test should run as intended
         }
 
         //This theory tests whenever passengers are added to the car model
